@@ -13,10 +13,14 @@ public class Main : MonoBehaviour {
 		brain = new Brain();
 		controller = new Controller();
 	}
-	
+
+
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		this.controller.observe();
 	}
+
+
+	public Brain getBrain() { return this.brain; }
 }

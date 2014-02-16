@@ -1,24 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Controller{
+public class Controller {
 
 	private CameraController cameraController;
+	private KeyController keyController;
 
-	public Controller() { Start (); }
 
-	// Use this for initialization
-	void Start ()
+	public Controller()
 	{
-		Debug.Log ("Controller.Start()");
+		Debug.Log ("Controller.Controller()");
+		
 		setActiveController("camera");
+		keyController = new KeyController();
+		setKeySetup("test01");
 	}
+
 	
-	// Update is called once per frame
-	void Update ()
+	// routine
+	public void observe ()
 	{
-	
+		this.keyController.work();
 	}
+
 
 	void setActiveController(string cmd)
 	{
@@ -28,6 +32,16 @@ public class Controller{
 			Camera.main.gameObject.AddComponent(typeof(CameraController));
 			CameraController camController = Camera.main.GetComponent<CameraController>();
 			camController.setMode(1);
+		}
+	}
+
+
+	void setKeySetup(string cmd)
+	{
+		if(cmd == "test01")
+		{
+			Debug.Log ("Keysettings: test01");
+			keyController.setSetup("test01");
 		}
 	}
 }

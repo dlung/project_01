@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class VehicleFactory : MonoBehaviour {
+public class VehicleFactory {
 
 	private CarFactory carFactory;
 
-	// Use this for initialization
-	void Start ()
+
+	// constructor
+	public VehicleFactory ()
 	{
+		Debug.Log ("VehicleFactory().VehicleFactory()");
 		carFactory = new CarFactory();
 	}
 	
-	// Update is called once per frame
-	void Update ()
-	{
 
-	
-	}
+	public void createCar(string carType) { this.carFactory.createCar(carType); }
 }
