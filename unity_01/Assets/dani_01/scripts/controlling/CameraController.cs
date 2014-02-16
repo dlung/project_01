@@ -11,12 +11,20 @@ public class CameraController : MonoBehaviour{
 	private bool left;
 	private bool right;
 	private bool down;
+	private bool rotateLeft;
+	private bool rotateRight;
 	private bool jump;
 	private bool sprint;
 
 	// mouse control variables
 	private float hor;
 	private float ver;
+
+	// other variables
+	private float speedTranslate = 0.1f;
+	private float speedRotate = 3f;
+	private float speedMouse = 1.3f;
+
 
 
 	// Use this for initialization
@@ -26,6 +34,7 @@ public class CameraController : MonoBehaviour{
 
 		if(mode == null)
 			mode = 0;
+
 	}
 	
 	// Update is called once per frame
@@ -53,47 +62,70 @@ public class CameraController : MonoBehaviour{
 
 	private void controlWASD_01()
 	{
-		bool forward = Input.GetKeyDown (KeyCode.W);
-		bool backward = Input.GetKeyDown (KeyCode.S);
-		bool left = Input.GetKeyDown (KeyCode.A);
-		bool right = Input.GetKeyDown (KeyCode.D);
-		bool down = Input.GetKeyDown (KeyCode.LeftControl);
-		bool up = Input.GetKeyDown (KeyCode.Space);
-		bool fast = Input.GetKeyDown (KeyCode.LeftShift);
-		
-		float hor = Input.GetAxisRaw ("Horizontal");
-		float ver = Input.GetAxisRaw ("Vertical");
 
-		float speed = 1f;
+		// key control starts here
+
+		bool forward = Input.GetKey (KeyCode.W);
+		bool backward = Input.GetKey (KeyCode.S);
+		bool left = Input.GetKey (KeyCode.A);
+		bool right = Input.GetKey (KeyCode.D);
+		bool rotateLeft = Input.GetKey (KeyCode.Q);
+		bool rotateRight = Input.GetKey (KeyCode.E);
+		bool down = Input.GetKey (KeyCode.LeftControl);
+		bool up = Input.GetKey (KeyCode.Space);
+		bool fast = Input.GetKey (KeyCode.LeftShift);
+		
+		float sprint;
+
+		if(fast)
+			sprint = 3f;
+		else
+			sprint = 1f;
 
 		if(forward) {
 			Debug.Log ("Move forward");
-			camera.transform.Translate(Vector3.forward * speed);
+			camera.transform.Translate(Vector3.forward * speedTranslate * sprint);
 		} else if(backward) {
 			Debug.Log ("Move backward");
-			camera.transform.Translate(Vector3.back);
+			camera.transform.Translate(Vector3.back * speedTranslate * sprint);
 		}
 
 		if(left) {
 			Debug.Log ("Move left");
-			camera.transform.Translate(Vector3.left);
+			camera.transform.Translate(Vector3.left * speedTranslate);
 		} else if(right) {
 			Debug.Log ("Move right");
-			camera.transform.Translate(Vector3.right);
+			camera.transform.Translate(Vector3.right * speedTranslate);
+		}
+
+		if(rotateLeft) {
+			Debug.Log ("Rotate left");
+			camera.transform.Rotate(Vector3.forward * speedRotate);
+		} else if(rotateRight) {
+			Debug.Log ("Rotate right");
+			camera.transform.Rotate(Vector3.back * speedRotate);
 		}
 
 		if(up) {
 			Debug.Log ("Move up");
-			camera.transform.Translate(Vector3.up);
+			camera.transform.Translate(Vector3.up * speedTranslate);
 		} else if(down) {
 			Debug.Log ("Move down");
-			camera.transform.Translate(Vector3.down);
+			camera.transform.Translate(Vector3.down * speedTranslate);
 		}
 
-		if(fast)
-			speed = 3f;
-		else
-			speed = 1f;
+
+		// mouse control starts here
+
+		float hor = Input.GetAxisRaw ("Mouse X");
+		float ver = Input.GetAxisRaw ("Mouse Y");
+
+		if((hor != 0f || ver != 0f) && Input.GetMouseButton(1))
+		{
+			camera.transform.Rotate(Vector3.up * hor * speedMouse);
+			camera.transform.Rotate(Vector3.left * ver * speedMouse);
+		}
+
 	}
 
 }
