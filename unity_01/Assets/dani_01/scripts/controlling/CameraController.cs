@@ -62,6 +62,8 @@ public class CameraController : MonoBehaviour{
 
 	private void controlWASD_01()
 	{
+		bool rotatable = false;
+		int mouseRotateMode = 1;
 
 		// key control starts here
 
@@ -83,34 +85,37 @@ public class CameraController : MonoBehaviour{
 			sprint = 1f;
 
 		if(forward) {
-			Debug.Log ("Move forward");
+			//Debug.Log ("Move forward");
 			camera.transform.Translate(Vector3.forward * speedTranslate * sprint);
 		} else if(backward) {
-			Debug.Log ("Move backward");
+			//Debug.Log ("Move backward");
 			camera.transform.Translate(Vector3.back * speedTranslate * sprint);
 		}
 
 		if(left) {
-			Debug.Log ("Move left");
+			//Debug.Log ("Move left");
 			camera.transform.Translate(Vector3.left * speedTranslate);
 		} else if(right) {
-			Debug.Log ("Move right");
+			//Debug.Log ("Move right");
 			camera.transform.Translate(Vector3.right * speedTranslate);
 		}
 
-		if(rotateLeft) {
-			Debug.Log ("Rotate left");
-			camera.transform.Rotate(Vector3.forward * speedRotate);
-		} else if(rotateRight) {
-			Debug.Log ("Rotate right");
-			camera.transform.Rotate(Vector3.back * speedRotate);
+		if(rotatable)
+		{
+			if(rotateLeft) {
+				//Debug.Log ("Rotate left");
+				camera.transform.Rotate(Vector3.forward * speedRotate);
+			} else if(rotateRight) {
+				//Debug.Log ("Rotate right");
+				camera.transform.Rotate(Vector3.back * speedRotate);
+			}
 		}
 
 		if(up) {
-			Debug.Log ("Move up");
+			//Debug.Log ("Move up");
 			camera.transform.Translate(Vector3.up * speedTranslate);
 		} else if(down) {
-			Debug.Log ("Move down");
+			//Debug.Log ("Move down");
 			camera.transform.Translate(Vector3.down * speedTranslate);
 		}
 
@@ -122,8 +127,20 @@ public class CameraController : MonoBehaviour{
 
 		if((hor != 0f || ver != 0f) && Input.GetMouseButton(1))
 		{
-			camera.transform.Rotate(Vector3.up * hor * speedMouse);
-			camera.transform.Rotate(Vector3.left * ver * speedMouse);
+
+
+			switch(mouseRotateMode)
+			{
+			default:
+			case 1:
+				camera.transform.RotateAround (camera.transform.position, Vector3.up, hor * speedMouse);
+				camera.transform.Rotate(Vector3.left * ver * speedMouse);
+				break;
+			case 2:
+				camera.transform.Rotate(Vector3.up * hor * speedMouse);
+				camera.transform.Rotate(Vector3.left * ver * speedMouse);
+				break;
+			}
 		}
 
 	}

@@ -5,17 +5,20 @@ public class Brain{
 
 	private AbstractFactory abstractFactory;
 
-	public Brain() { Start (); }
 
-	// Use this for initialization
-	void Start ()
+	// constructor
+	public Brain()
 	{
+		Debug.Log ("Brain().Brain()");
+
 		abstractFactory = new AbstractFactory();
 	}
 	
-	// Update is called once per frame
-	void Update ()
+
+	public AbstractFactory getAbstractFactory()
 	{
-	
+		return this.abstractFactory;
 	}
+
+
 }

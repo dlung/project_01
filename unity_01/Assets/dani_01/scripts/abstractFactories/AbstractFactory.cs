@@ -5,15 +5,13 @@ public class AbstractFactory {
 
 	private VehicleFactory vehicleFactory;
 
-	// Use this for initialization
-	void Start ()
+
+	public AbstractFactory()
 	{
+		Debug.Log ("AbstractFactory().AbstractFactory()");
 		vehicleFactory = new VehicleFactory();
 	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
-	}
+
+
+	public void createCar(string carType) { this.vehicleFactory.createCar(carType); }
 }
