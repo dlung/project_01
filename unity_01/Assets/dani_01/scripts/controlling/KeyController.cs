@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using System.Collections;
 
 public class KeyController {
@@ -61,7 +62,7 @@ public class KeyController {
  * 	Key Functions
  * 
  * ************************************************************************************************************************************/
-
+/*
 	void createCar(string carType)
 	{
 		Debug.Log("setup() test01");
@@ -71,3 +72,4 @@ public class KeyController {
 	}
 
 }
+*/
