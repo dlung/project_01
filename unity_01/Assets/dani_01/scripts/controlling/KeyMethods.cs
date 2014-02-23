@@ -4,12 +4,8 @@ using System.Collections.Generic;
 using System;
 
 
-public class Keymethods {
+public class KeyMethods {
 
-
-	protected Dictionary<bool, Action> methodinfo;
-	protected Dictionary<string, Dictionary<bool, Action>>methodlist;
-	private bool methodlistInitialized;
 
 	private GameObject brain;
 	private Main main;
@@ -19,21 +15,11 @@ public class Keymethods {
 
 	/********************************************************************************************* CONSTRUCTOR & ROUTINES*/
 
-	public Keymethods()
+	public KeyMethods()
 	{
 		this.brain = GameObject.Find("brain");
 		this.main = (Main) brain.GetComponent(typeof(Main));
 		this.player = main.getPlayer();
-
-
-		if(methodlist == null) {
-			methodinfo = new Dictionary<bool, Action>();
-			methodlist = new Dictionary<string, Dictionary<bool, Action>>();
-		}
-
-
-		if(!methodlistInitialized)
-			initMethodlist();
 	}
 
 
@@ -43,19 +29,6 @@ public class Keymethods {
 
 
 	/********************************************************************************************* INITIALIZATION-METHODS */
-	
-	private void initMethodlist()
-	{
-		methodlist["moveForward"] = new Dictionary<bool, Action>{ {false, () => moveForward()} };
-		methodlist["moveBack"] = new Dictionary<bool, Action>{ {false, () => moveBack()} };
-		methodlist["moveLeft"] = new Dictionary<bool, Action>{ {false, () => moveLeft()} };
-		methodlist["moveRight"] = new Dictionary<bool, Action>{ {false, () => moveRight()} };
-		methodlist["crouch"] = new Dictionary<bool, Action>{ {false, () => crouch()} };
-		methodlist["jump"] = new Dictionary<bool, Action>{ {false, () => jump()} };
-
-		methodlist["sayBla"] = new Dictionary<bool, Action>{ {false, () => sayBla ()}  };
-		methodlist["createCar"] = new Dictionary<bool, Action>{ {true, () => createCar ()}  };
-	}
 
 
 
@@ -64,6 +37,10 @@ public class Keymethods {
 	public void createCar(){
 		main.getBrain().getAbstractFactory().createCar("auto01");
 	}
+
+	// player mouse methods
+	public void leftClick() { /*Debug.Log ("LEFT CLICK <<<<<<<<");*/ }
+	public void rightClick() { /*Debug.Log (">>>>>>> RIGHT CLICK");*/ }
 
 	// player moving methods
 	public void moveForward(){ this.player.GetComponent<Player>().moveForward(); }
@@ -77,5 +54,7 @@ public class Keymethods {
 	{
 		Debug.Log ("BLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}
+
+	private void save() { Debug.Log ("SAAAAVE"); }
 	
 }
