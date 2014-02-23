@@ -34,8 +34,8 @@ public class KeyMethods {
 
 	/********************************************************************************************* CREATE / OTHER METHODS */
 
-	public void createCar(){
-		main.getBrain().getAbstractFactory().createCar("auto01");
+	public void createCar(string carType){
+		main.getBrain().getAbstractFactory().createCar(carType);
 	}
 
 	// player mouse methods
@@ -47,14 +47,13 @@ public class KeyMethods {
 	public void moveBack(){ this.player.GetComponent<Player>().moveBack(); }
 	public void moveLeft(){ this.player.GetComponent<Player>().moveLeft(); }
 	public void moveRight(){ this.player.GetComponent<Player>().moveRight(); }
-	public void jump() { }
-	public void crouch() { }
 
-	private void sayBla()
-	{
-		Debug.Log ("BLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-	}
+	public void boost() { this.player.GetComponent<Player>().boost();  }
+	public void jump() { this.player.GetComponent<Player>().jump(); }
+	public void crouch() { this.player.GetComponent<Player>().crouch(); }
 
-	private void save() { Debug.Log ("SAAAAVE"); }
+	protected void sayBla() { Debug.Log ("BLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"); }
+
+	protected void save() { Debug.Log ("SAAAAVE"); }
 	
 }
