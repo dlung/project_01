@@ -1,21 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class motor : MonoBehaviour {
+public class Motor : MonoBehaviour {
+
+	public float motor_torque;
+	public float maxAngularVelocity = 200f;
+	public Rigidbody motor_axle;
 
 	// Use this for initialization
 	void Start () {
 	
+
+		
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
-	}
-
-	void FixedUpdate() {
-
-		rigidbody.AddTorque(0 ,0 , 1000);
+		motor_axle.maxAngularVelocity = maxAngularVelocity;
+		motor_axle.AddRelativeTorque(-Vector3.up*motor_torque);
 
 
 	}
