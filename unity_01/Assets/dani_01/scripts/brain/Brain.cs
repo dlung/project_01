@@ -20,5 +20,8 @@ public class Brain{
 		return this.abstractFactory;
 	}
 
+	/********************************************************************************************* OTHER METHODS */
+	
+	public static void doNothing(){ }
 
 }
